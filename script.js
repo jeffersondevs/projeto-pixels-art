@@ -1,6 +1,7 @@
 const pixelBoard = document.getElementById('pixel-board');
 let quantidadePixel = 25;
 let corSelecionada;
+const btnLimpar = document.getElementById('clear-board');
 
 function alterarCorBlack() {
   let corBlack = document.getElementsByClassName('color')[0];
@@ -68,6 +69,7 @@ window.onload = () => {
   }
   geradorPixel();
   corSelecionada = document.querySelector('.selected').style.backgroundColor;
+  btnLimpar.addEventListener('click', limpar)
 }
 
 function trocarCorBg() {
@@ -84,6 +86,13 @@ for (let index = 0; index < selecionarCor.length; index += 1) {
     event.target.classList.add('selected');
     corSelecionada = event.target.style.backgroundColor;
   })
+}
+
+function limpar() {
+  let pegarPixel = document.getElementsByClassName('pixel');
+  for(let index = 0; index < pegarPixel.length; index += 1){
+    pegarPixel[index].style.backgroundColor = 'white';
+  }
 }
 
 
