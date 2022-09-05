@@ -1,5 +1,6 @@
 const pixelBoard = document.getElementById('pixel-board');
 let quantidadePixel = 25;
+let corSelecionada;
 
 function alterarCorBlack() {
   let corBlack = document.getElementsByClassName('color')[0];
@@ -28,13 +29,13 @@ alterarCorBlue();
 let btn = document.getElementById('button-random-color');
 let colorCores = document.getElementsByClassName('color');
 
-function numerosAleatorios(){
+function numerosAleatorios() {
   return Math.random() * 255;
 }
 
 function corAleatoria() {
   let coresArmazenadas = ['black'];
-  for(let index = 1; index < colorCores.length; index += 1){
+  for (let index = 1; index < colorCores.length; index += 1) {
     colorCores[index].style.backgroundColor = 'rgb(' + numerosAleatorios() + ', ' + numerosAleatorios() + ', ' + numerosAleatorios();
     coresArmazenadas.push(colorCores[index].style.backgroundColor);
   }
@@ -43,7 +44,7 @@ function corAleatoria() {
 
 btn.addEventListener('click', () => {
   corAleatoria();
-}) 
+})
 
 function criarDiv() {
   let newDiv = document.createElement('div');
@@ -51,26 +52,39 @@ function criarDiv() {
   return newDiv;
 }
 
-function geradorPixel(){
-  for(let index = 0; index < quantidadePixel; index += 1){
-    pixelBoard.appendChild(criarDiv());
+function geradorPixel() {
+  for (let index = 0; index < quantidadePixel; index += 1) {
+    let newPixel = criarDiv()
+    newPixel.addEventListener('click', () => {
+      newPixel.style.backgroundColor = corSelecionada;
+    })
+    pixelBoard.appendChild(newPixel);
   }
 }
 
 window.onload = () => {
-  if(localStorage.colorPalette){
+  if (localStorage.colorPalette) {
     trocarCorBg()
-  } 
+  }
   geradorPixel();
+  corSelecionada = document.querySelector('.selected').style.backgroundColor;
 }
 
-function trocarCorBg() {   
+function trocarCorBg() {
   let armazenaLocalStorage = JSON.parse(localStorage.colorPalette)
-  for(let index = 0; index < colorCores.length; index += 1){
+  for (let index = 0; index < colorCores.length; index += 1) {
     colorCores[index].style.backgroundColor = armazenaLocalStorage[index];
   }
 }
 
+let selecionarCor = document.getElementsByClassName('color');
+for (let index = 0; index < selecionarCor.length; index += 1) {
+  selecionarCor[index].addEventListener('click', (event) => {
+    document.querySelector('.selected').classList.remove('selected')
+    event.target.classList.add('selected');
+    corSelecionada = event.target.style.backgroundColor;
+  })
+}
 
 
 
