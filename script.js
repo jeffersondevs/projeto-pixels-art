@@ -1,3 +1,6 @@
+const pixelBoard = document.getElementById('pixel-board');
+let quantidadePixel = 25;
+
 function alterarCorBlack() {
   let corBlack = document.getElementsByClassName('color')[0];
   corBlack.style.backgroundColor = "black";
@@ -42,10 +45,23 @@ btn.addEventListener('click', () => {
   corAleatoria();
 }) 
 
+function criarDiv() {
+  let newDiv = document.createElement('div');
+  newDiv.className = 'pixel';
+  return newDiv;
+}
+
+function geradorPixel(){
+  for(let index = 0; index < quantidadePixel; index += 1){
+    pixelBoard.appendChild(criarDiv());
+  }
+}
+
 window.onload = () => {
   if(localStorage.colorPalette){
     trocarCorBg()
   } 
+  geradorPixel();
 }
 
 function trocarCorBg() {   
@@ -54,6 +70,7 @@ function trocarCorBg() {
     colorCores[index].style.backgroundColor = armazenaLocalStorage[index];
   }
 }
+
 
 
 
