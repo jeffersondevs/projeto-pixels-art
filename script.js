@@ -1,28 +1,26 @@
-
 function alterarCorBlack() {
   let corBlack = document.getElementsByClassName('color')[0];
   corBlack.style.backgroundColor = "black";
 }
-/* alterarCorBlack(); */
+alterarCorBlack();
 
 function alterarCorGreen() {
   let corGreen = document.getElementsByClassName('color')[1];
   corGreen.style.backgroundColor = "green";
 }
-/* alterarCorGreen(); */
+alterarCorGreen();
 
 function alterarCorRed() {
   let corRed = document.getElementsByClassName('color')[2];
   corRed.style.backgroundColor = "red";
 }
-/* alterarCorRed(); */
+alterarCorRed();
 
 function alterarCorBlue() {
   let corBlue = document.getElementsByClassName('color')[3];
   corBlue.style.backgroundColor = "blue";
 }
-/* alterarCorBlue(); */
-
+alterarCorBlue();
 
 let btn = document.getElementById('button-random-color');
 let colorCores = document.getElementsByClassName('color');
@@ -44,17 +42,19 @@ btn.addEventListener('click', () => {
   corAleatoria();
 }) 
 
-/* window.onload = () => {
-  trocarCorBg()
+window.onload = () => {
+  if(localStorage.colorPalette){
+    trocarCorBg()
+  } 
 }
-
 
 function trocarCorBg() {   
   let armazenaLocalStorage = JSON.parse(localStorage.colorPalette)
-  console.log(armazenaLocalStorage)
   for(let index = 0; index < colorCores.length; index += 1){
     colorCores[index].style.backgroundColor = armazenaLocalStorage[index];
-    console.log(armazenaLocalStorage[index])
   }
 }
- */
+
+
+
+
