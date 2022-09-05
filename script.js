@@ -47,29 +47,44 @@ btn.addEventListener('click', () => {
   corAleatoria();
 })
 
-function criarDiv() {
+function criarDiv(pixelId) {
   let newDiv = document.createElement('div');
   newDiv.className = 'pixel';
+  newDiv.id = pixelId;
+  newDiv.addEventListener('click', () => {
+    newDiv.style.backgroundColor = corSelecionada;
+    let obj = {};
+    if (localStorage.pixelBoard) {
+      obj = JSON.parse(localStorage.getItem('pixelBoard'));
+      obj[pixelId] = corSelecionada;
+    } else {
+      obj[pixelId] = corSelecionada;
+    }
+    localStorage.setItem('pixelBoard', JSON.stringify(obj));
+  })
   return newDiv;
 }
 
 function geradorPixel() {
   for (let index = 0; index < quantidadePixel; index += 1) {
-    let newPixel = criarDiv()
-    newPixel.addEventListener('click', () => {
-      newPixel.style.backgroundColor = corSelecionada;
-    })
+    let newPixel = criarDiv(index)
+    if(localStorage.pixelBoard){
+      let idAtual = JSON.parse(localStorage.pixelBoard);
+      if(index in idAtual){
+        newPixel.style.backgroundColor = idAtual[index];
+      }
+    }
     pixelBoard.appendChild(newPixel);
   }
 }
 
 window.onload = () => {
   if (localStorage.colorPalette) {
-    trocarCorBg()
+    trocarCorBg();
   }
   geradorPixel();
   corSelecionada = document.querySelector('.selected').style.backgroundColor;
-  btnLimpar.addEventListener('click', limpar)
+  btnLimpar.addEventListener('click', limpar);
 }
 
 function trocarCorBg() {
@@ -90,8 +105,11 @@ for (let index = 0; index < selecionarCor.length; index += 1) {
 
 function limpar() {
   let pegarPixel = document.getElementsByClassName('pixel');
-  for(let index = 0; index < pegarPixel.length; index += 1){
+  for (let index = 0; index < pegarPixel.length; index += 1) {
     pegarPixel[index].style.backgroundColor = 'white';
+  }
+  if (localStorage.pixelBoard) {
+    localStorage.removeItem('pixelBoard');
   }
 }
 
