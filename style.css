@@ -1,3 +1,18 @@
+body{
+  background-color: #323232;
+}
+
+#conteiner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#title{
+  color: aquamarine;
+}
+
 .color {
   width: 100px;
   height: 100px;
@@ -10,6 +25,7 @@
   padding: 10px;
   border-radius: 5px;
   font-size: 14px; 
+  cursor: pointer;
 }
 
 .pixel{
@@ -22,5 +38,22 @@
 #pixel-board{
   display: grid;
   grid-template-columns: repeat(5, 40px);
+  margin-top: 20px;
+}
+
+#board-size{
+  padding: 10px 10px;
+}
+
+#generate-board{
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+#botoes{
+  margin: 20px;
+}
+
+#direcao{
   margin-top: 20px;
 }

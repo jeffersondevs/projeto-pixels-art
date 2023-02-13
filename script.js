@@ -2,6 +2,8 @@ const pixelBoard = document.getElementById('pixel-board');
 let quantidadePixel = 25;
 let corSelecionada;
 const btnLimpar = document.getElementById('clear-board');
+let alert1 = document.getElementById('board-size');
+let btnVqv = document.getElementById('generate-board');
 
 function alterarCorBlack() {
   let corBlack = document.getElementsByClassName('color')[0];
@@ -112,6 +114,18 @@ function limpar() {
     localStorage.removeItem('pixelBoard');
   }
 }
+
+btnVqv.addEventListener('click', () => {
+  const inputValue = alert1.value;
+  if (inputValue === '') {
+    alert('Board inválido!');
+    return;
+  }
+});
+
+
+
+
 
 
 
